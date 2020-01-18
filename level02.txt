@@ -1,0 +1,18 @@
+List home file
+	-> ----r--r-- 1 flag02  level02 8302 Aug 30  2015 level02.pcap
+
+Copy scp -P 4242 level02@10.12.1.137:~/level02.pcap . 
+
+Pcap is a network capture, open it with wireshark : https://www.wireshark.org/download.html
+Use Analyse -> follow TCP stream
+	-> Password: ft_wandr...NDRel.L0L
+	. is bad char
+	use hexadecimal . is 0x7f so (del)
+	-> Password is ft_waNDReL0L
+
+
+level02@SnowCrash:~$ su flag02
+Password:
+Don't forget to launch getflag !
+flag02@SnowCrash:~$ getflag
+Check flag.Here is your token : kooda2puivaav1idi4f57q8iq

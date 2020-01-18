@@ -1,0 +1,25 @@
+List home file
+	-> nothing
+
+Command to find file owned by flag00
+	find / -user flag00 1>/tmp/list
+	/*
+	/usr/sbin/john
+	/rofs/usr/sbin/john
+	*/
+
+john file content
+	cdiiddwpgswtgt
+	-> don't work as is but it seems to be encrypted
+
+web decoder usage https://tech.pookey.co.uk/non-wp/encoder-decoder.php
+	-> ROT all (1-25)
+	-> ROT 11 :	nottoohardhere
+
+
+
+level00@SnowCrash:~$ su flag00
+Password:
+Don't forget to launch getflag !
+flag00@SnowCrash:~$ getflag
+Check flag.Here is your token : x24ti5gi3x0ol2eh4esiuxias
