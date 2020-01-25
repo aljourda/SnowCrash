@@ -1,0 +1,44 @@
+List home file
+	-rwsr-sr-x 1 flag09  level09 7640 Mar  5  2016 level09
+	----r--r-- 1 flag09  level09   26 Mar  5  2016 token
+
+We try ./level09
+	-> You need to provied only one arg.
+	-> nothing as is
+
+vi token
+	-> f4kmm6p|=<82>^?p<82>n<83><82>DB<83>Du{^?<8c><89>
+
+Copy scp -P 4242 level09@10.11.200.52:~/level09 .
+	NSA reverse tool (the best and free) Ghidra : https://ghidra-sre.org/
+	/*
+		puts("You should not reverse this");
+		...
+		LAB_08048996:
+		local_120 = local_120 + 1;
+		uVar8 = 0xffffffff;
+		pcVar5 = *(char **)(param_2 + 4);
+		do {
+			if (uVar8 == 0) break;
+			uVar8 = uVar8 - 1;
+			cVar1 = *pcVar5;
+			pcVar5 = pcVar5 + (uint)bVar9 * -2 + 1;
+		} while (cVar1 != '\0');
+	*/
+	-> lot of code and difficult
+
+We try ./level09 f4kmm6p
+	-> f5mpq;v
+	-> every position it increments char value
+	-> so we have to decrement to decode token file
+
+We build level09.c
+level09@SnowCrash:~$./a.out `cat token`
+f3iji1ju5yuevaus41q1afiuq
+
+
+level09@SnowCrash:~$ su flag09
+Password:
+Don't forget to launch getflag !
+flag09@SnowCrash:~$ getflag
+Check flag.Here is your token : s5cAJpM8ev6XHw998pRWG728z
